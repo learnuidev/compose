@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/Button";
+import { useAWSCredentials } from "./hooks/use-aws-credentials";
 
 function App() {
+  const stats = useAWSCredentials();
   return (
     <div className="h-screen">
       <div className="flex justify-center items-center flex-col mt-32">
@@ -8,6 +10,9 @@ function App() {
 
         <p className="font-mono mt-4 text-xl">AWS Console for Desktop</p>
 
+        <code>
+          <pre>{JSON.stringify(stats, null, 4)}</pre>
+        </code>
         <Button
           size={"sm"}
           variant={"outline"}
