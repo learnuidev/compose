@@ -3,9 +3,10 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "main": "src/electron/main",
+  "main": "dist-electron/main",
   "scripts": {
     "dev:electron": "electron .",
+    "transpile": "tsc --project src/electron/tsconfig.json",
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",

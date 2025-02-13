@@ -12,7 +12,7 @@ function App() {
         variant={"outline"}
         className="rounded-full mt-8 cursor-pointer"
       >
-        Discover
+        Discover Compose
       </Button>
     </div>
   );

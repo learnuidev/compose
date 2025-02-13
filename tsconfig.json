@@ -4,6 +4,7 @@
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" },
   ],
+  "exclude": ["src/electron"],
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
