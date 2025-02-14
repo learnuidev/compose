@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/src/components/ui/Button";
 import { useAWSCredentials } from "./hooks/use-aws-credentials";
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
         </code>
         <Button
           size={"sm"}
-          variant={"outline"}
+          // variant={"outline"}
           className="rounded-full mt-8 cursor-pointer p-4"
           onClick={() => {
             alert("composeui");
