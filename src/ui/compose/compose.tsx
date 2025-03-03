@@ -18,7 +18,7 @@ export function Compose() {
             alert("composeui");
           }}
         >
-          Discover Compose
+          Discover Apps
         </Button>
       </div>
     </div>
