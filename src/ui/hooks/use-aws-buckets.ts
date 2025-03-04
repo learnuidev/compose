@@ -1,42 +1,24 @@
+import { useAWSProfileStore } from "@/src/stores/aws-profile.store";
 import { useEffect, useState } from "react";
 // import { ipcRenderer } from "electron";
 
 export function useListAWSBuckets() {
   const [value, setValue] = useState([]);
 
+  const profile = useAWSProfileStore((state) => state.profile);
+
   useEffect(() => {
     window.electron.listAWSBuckets({
       region: "us-east-1",
-      profile: "yoserverless",
+      profile: profile,
     });
   }, []);
 
-  // useEffect(() => {
-  //   window.electron.listAWSBuckets({
-  //     region: "us-east-1",
-  //     profile: "yoserverless",
-  //   });
-  //   // ipcRenderer.send("list-buckets", {
-  //   //   region: "us-east-1",
-  //   //   profile: "yoserverless",
-  //   // });
-  //   // const unsub = window.electron.subscribeListAWSBuckets((buckets: any) =>
-  //   //   setValue(buckets)
-  //   // );
-  //   // return unsub;
-  // }, []);
-
-  const unsub = window.electron.listAWSBucketsSuccess((stats) =>
-    setValue(stats)
-  );
-  // return unsub;
-
-  // useEffect(() => {
-  //   const unsub = window.electron.listAWSBucketsSuccess((stats) =>
-  //     setValue(stats)
-  //   );
-  //   return unsub;
-  // }, []);
+  useEffect(() => {
+    const unsub = window.electron.listAWSBucketsSuccess((stats) =>
+      setValue(stats)
+    );
+  }, []);
 
   return value;
 }

@@ -22,7 +22,7 @@ export async function listBuckets({
   const client = createClient(profile, region);
   try {
     const data = await client.send(new ListBucketsCommand({}));
-    console.log("Success", data.Buckets);
+    // console.log("Success", data.Buckets);
     return data.Buckets;
   } catch (error) {
     console.error("Error", error);
@@ -45,7 +45,7 @@ export async function listObjects({
       new ListObjectsCommand({ Bucket: bucketName })
     );
 
-    console.log("Success", data.Contents);
+    // console.log("Success", data.Contents);
     return data.Contents;
   } catch (error) {
     console.error("Error", error);

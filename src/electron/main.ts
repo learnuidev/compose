@@ -7,6 +7,7 @@ import { sendAWSCredentials } from "./subscriptions/aws-credentails/send-aws-cre
 import { ipcMain, net } from "electron";
 import { listBuckets } from "./lib/s3.js";
 import { ipcMainHandle, ipcWebContentsSend } from "./util.js";
+import { loadAWSCredentials } from "./subscriptions/aws-credentails/load-aws-credentials.js";
 // import { subscriptionIds } from "./subscriptions/subsription-ids.js";
 
 let mainWindow;
@@ -40,16 +41,14 @@ app.on("ready", () => {
 
     ipcWebContentsSend("list-buckets-success", mainWindow.webContents, buckets);
   });
+
+  ipcMainHandle("list-aws-credentials", async (data) => {
+    const credentials = loadAWSCredentials();
+
+    ipcWebContentsSend(
+      "list-aws-credentials-success",
+      mainWindow.webContents,
+      credentials
+    );
+  });
 });
-
-// ipcMain.on("list-buckets", async (event, data) => {
-//   const region = data?.region || "us-east-1";
-//   const profile = data?.profile || "yoserverless";
-//   const buckets = await listBuckets({
-//     region,
-//     profile,
-//   });
-//   // const buckets = [];
-
-//   mainWindow.webContents.send("aws-buckets", buckets);
-// });

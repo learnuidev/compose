@@ -13,6 +13,16 @@ electron.contextBridge.exposeInMainWorld("electron", {
       callback(stats);
     }),
 
+  listAWSCredentials: (callback: any) => {
+    ipcInvoke("list-aws-credentials", callback);
+  },
+  listAWSCredentialsSuccess: (callback: any) => {
+    ipcOn("list-aws-credentials-success", (buckets) => {
+      callback(buckets);
+    });
+    // ipcInvoke("list-aws-credentials", callback);
+  },
+
   listAWSBuckets: (callback: any) => {
     ipcInvoke("list-buckets", callback);
   },
