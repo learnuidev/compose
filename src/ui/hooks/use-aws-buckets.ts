@@ -4,10 +4,12 @@ import { useEffect, useState } from "react";
 export function useListAWSBuckets() {
   const [value, setValue] = useState([]);
 
-  window.electron.listAWSBuckets({
-    region: "us-east-1",
-    profile: "yoserverless",
-  });
+  useEffect(() => {
+    window.electron.listAWSBuckets({
+      region: "us-east-1",
+      profile: "yoserverless",
+    });
+  }, []);
 
   // useEffect(() => {
   //   window.electron.listAWSBuckets({

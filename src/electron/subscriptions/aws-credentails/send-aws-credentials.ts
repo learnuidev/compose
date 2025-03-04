@@ -5,13 +5,11 @@ import { subscriptionIds } from "../subsription-ids.js";
 import { loadAWSCredentials } from "./load-aws-credentials.js";
 
 export function sendAWSCredentials(mainWindow: BrowserWindow) {
-  setInterval(async () => {
-    const credentials = loadAWSCredentials();
+  const credentials = loadAWSCredentials();
 
-    ipcWebContentsSend(
-      subscriptionIds["aws-credentials"],
-      mainWindow.webContents,
-      credentials
-    );
-  }, pollingInterval);
+  ipcWebContentsSend(
+    subscriptionIds["aws-credentials"],
+    mainWindow.webContents,
+    credentials
+  );
 }
