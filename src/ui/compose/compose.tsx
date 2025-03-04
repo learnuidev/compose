@@ -1,7 +1,14 @@
 import { ThggleTheme } from "@/src/components/toggle-theme";
 import { Button } from "@/src/components/ui/button";
+import { useAWSCredentials } from "../hooks/use-aws-credentials";
+import { useListAWSBuckets } from "../hooks/use-aws-buckets";
 
 export function Compose() {
+  const credentials = useAWSCredentials();
+
+  const buckets = useListAWSBuckets();
+
+  console.log("buckets", buckets);
   return (
     <div className="p-4">
       <ThggleTheme />

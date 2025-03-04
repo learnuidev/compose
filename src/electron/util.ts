@@ -1,6 +1,7 @@
 import { ipcMain, WebContents, WebFrameMain } from "electron";
 import { getUIPath } from "./path-resolver.js";
 import { pathToFileURL } from "url";
+import { isDev } from "./utils/is-dev.js";
 
 export function ipcMainHandle<Key extends keyof EventPayloadMapping>(
   key: Key,

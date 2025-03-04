@@ -1,3 +1,5 @@
+import { subscriptionIds } from "./subscriptions/subsription-ids";
+
 const electron = require("electron");
 
 electron.contextBridge.exposeInMainWorld("electron", {
@@ -11,6 +13,18 @@ electron.contextBridge.exposeInMainWorld("electron", {
       callback(stats);
     }),
 
+  listAWSBuckets: (callback: any) => {
+    ipcInvoke("list-buckets", callback);
+  },
+  listAWSBucketsSuccess: (callback: any) => {
+    ipcOn("list-buckets-success", (buckets) => {
+      callback(buckets);
+    });
+  },
+  // ipcOn("aws-buckets", (buckets) => {
+  //   callback(buckets);
+  // }),
+
   subscribeChangeView: (callback) =>
     ipcOn("changeView", (view) => {
       callback(view);
@@ -21,9 +35,10 @@ electron.contextBridge.exposeInMainWorld("electron", {
 } satisfies Window["electron"]);
 
 function ipcInvoke<Key extends keyof EventPayloadMapping>(
-  key: Key
+  key: Key,
+  properties: any
 ): Promise<EventPayloadMapping[Key]> {
-  return electron.ipcRenderer.invoke(key);
+  return electron.ipcRenderer.invoke(key, properties);
 }
 
 function ipcOn<Key extends keyof EventPayloadMapping>(
